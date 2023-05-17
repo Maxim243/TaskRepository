@@ -6,6 +6,8 @@ public class Task {
         char[] wordChars = word.toCharArray();
         char[] textChars = text.toCharArray();
 
+        if (wordChars.length == 0 || textChars.length == 0) return false;
+
         for (char wordChar : wordChars) {
             for (char textChar : textChars) {
                 if (wordChar == textChar) {
@@ -18,7 +20,6 @@ public class Task {
     }
 
     public static void main(String[] args) {
-        System.out.println(Task.verifyText("gnavaislang", "Java - is a programming language"));
-
+        System.out.println(Task.verifyText("progisava", "Java - is a programming language"));
     }
 }
