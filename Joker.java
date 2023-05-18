@@ -1,10 +1,6 @@
 package org.exampl;
 
-public class Joker {
-
-    private int health;
-    private int damage;
-    private String name;
+public class Joker extends Fighter {
 
     public Joker() {
         this.health = 120;
@@ -16,37 +12,21 @@ public class Joker {
         this.health = this.health - damage;
     }
 
-    public void attack(Batman batman) {
-        batman.takeDamage(this.damage);
-        System.out.println(this.name + "attacks " + batman.getName() + " with damage " + this.damage);
+
+    @Override
+    public void dodgeFromAttack(Fighter fighter) {
+        this.health += fighter.getDamage();
+        System.out.println(this.getName() + " dodged from " + fighter.getName() + " attack");
     }
 
+    @Override
+    public void attack(Fighter fighter) {
+        fighter.takeDamage(this.damage);
+        System.out.println(this.name + " attacks " + fighter.getName() + " with damage " + this.damage);
+    }
+
+    @Override
     public void displayHealth() {
         System.out.println(this.name + " health= " + this.getHealth());
     }
-
-    public int getHealth() {
-        return health;
-    }
-
-    public void setHealth(int health) {
-        this.health = health;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getDamage() {
-        return damage;
-    }
-
-    public void setDamage(int damage) {
-        this.damage = damage;
-    }
-
 }

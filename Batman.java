@@ -1,9 +1,6 @@
 package org.exampl;
 
-public class Batman {
-    private int health;
-    private int damage;
-    private String name;
+public class Batman extends Fighter {
 
     public Batman() {
         this.health = 100;
@@ -11,40 +8,26 @@ public class Batman {
         this.name = "Batman";
     }
 
+    @Override
     public void takeDamage(int damage) {
         this.health = this.health - damage;
     }
 
-    public void attack(Joker joker) {
-        joker.takeDamage(this.damage);
-        System.out.println(this.name + " attacks " + joker.getName() + " with damage " + this.damage);
+    @Override
+    public void attack(Fighter fighter) {
+        fighter.takeDamage(this.damage);
+        System.out.println(this.name + " attacks " + fighter.getName() + " with damage " + this.damage);
     }
 
+    @Override
     public void displayHealth() {
         System.out.println(this.name + " health= " + this.getHealth());
     }
 
-    public String getName() {
-        return name;
-    }
+    @Override
+    public void dodgeFromAttack(Fighter fighter) {
+        this.health += fighter.getDamage();
+        System.out.println(this.getName() + " dodged from " + fighter.getName() + " attack");
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getHealth() {
-        return health;
-    }
-
-    public void setHealth(int health) {
-        this.health = health;
-    }
-
-    public int getDamage() {
-        return damage;
-    }
-
-    public void setDamage(int damage) {
-        this.damage = damage;
     }
 }
