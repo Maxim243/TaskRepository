@@ -2,10 +2,8 @@ package org.exampl;
 
 import java.util.Arrays;
 import java.util.Map;
-import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Task {
     public static boolean verifyText(String word, String text) {
@@ -48,25 +46,14 @@ public class Task {
         Map<String, Long> wordMap = Arrays.stream(stringArrayWord)
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
-        for (Map.Entry<String, Long> iterateMapWord : textMap.entrySet()) {
-//            for (Map.Entry<String, Long> iterateMapText : wordMap.entrySet()) {
-//                if (Objects.equals(iterateMapWord.getValue(), iterateMapText.getValue())
-//                        && Objects.equals(iterateMapWord.getKey(), iterateMapText.getKey())) {
-//                    wordMap.
-            while (count != wordMap.size()) {
-                if(count == wordMap.size()) break;
-                if (textMap.containsKey(iterateMapWord.getKey())
-                        && textMap.containsValue(iterateMapWord.getValue())) {
-//                    wordMap.remove(iterateMapWord.getKey(), iterateMapWord.getValue());
-                    count++;
-                }
-            }
+        for (Map.Entry<String, Long> iterateMapWord : wordMap.entrySet()) {
+            if(textMap.containsKey(iterateMapWord.getKey())) count++;
         }
-        return wordMap.isEmpty();
+        return count == wordMap.size();
     }
 
     public static void main(String[] args) {
 //        System.out.println(Task.verifyText("progisava", "Java - is a programming language"));
-        System.out.println(verifyTextWithMap("word", "wordjvn"));
+        System.out.println(verifyTextWithMap("dansatous", "Fast and Furious "));
     }
 }
