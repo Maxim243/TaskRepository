@@ -3,42 +3,55 @@ package org.exampl;
 
 public class Fight {
 
-    public static void getFight(Fighter batman, Fighter joker) {
+    public static double whoWillAttackFirst() {
+        return Math.random();
+    }
+
+    public static boolean isFighterDead(Fighter fighter, Fighter attacker) {
+        boolean fighterHealth = fighter.getHealth() <= 0;
+        if (fighterHealth) {
+            System.out.println(attacker.getName() + " wins");
+            return true;
+        }
+        fighter.displayHealth();
+        return false;
+    }
+
+    public static void getFight(Fighter fighter1, Fighter fighter2) {
         boolean start = true;
-        if (batman == null || joker == null) {
+        if (fighter1 == null || fighter2 == null) {
             System.out.println("Please create your fighter");
-            start = false;
+            return;
         }
 
-        int i = 0;
+        double number = whoWillAttackFirst();
+
         while (start) {
-            if (i < 1) {
+            if (number < 0.5) {
 
-                batman.attack(joker);
-                joker.dodgeFromAttack(batman);
-                joker.displayHealth();
-                joker.attack(batman);
-                batman.dodgeFromAttack(joker);
-                batman.displayHealth();
-                i++;
+                fighter1.attack(fighter2);
+                if (isFighterDead(fighter2, fighter1)) {
+                    start = false;
+                }
+                if (start) {
+                    fighter2.attack(fighter1);
+                    if (isFighterDead(fighter1, fighter2)) {
+                        start = false;
+                    }
+                }
+            } else {
+                fighter2.attack(fighter1);
+                if (isFighterDead(fighter1, fighter2)) {
+                    start = false;
+                }
+                if (start) {
+                    fighter1.attack(fighter2);
+                    if (isFighterDead(fighter2, fighter1)) {
+                        start = false;
+                    }
+                }
             }
-            batman.attack(joker);
-            batman.displayHealth();
-            joker.attack(batman);
-            joker.displayHealth();
-            if (joker.getHealth() <= 0) {
-                System.out.println(batman.getName() + " wins");
-                start = false;
-            }
-
-            if (batman.getHealth() <= 0) {
-                System.out.println(joker.getName() + " wins");
-                start = false;
-            }
-
-
         }
-
     }
 
 
